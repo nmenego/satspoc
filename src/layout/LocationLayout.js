@@ -83,13 +83,13 @@ const LocationLayout = () => {
                     if (isPolling) {
                         return (
                             <>
-                                <CCol xs={12}>
+                                <CCol xs={10}>
                                     <CCard className="mb-4">
                                         <CCardHeader>Room Summary</CCardHeader>
                                         <CTable striped columns={componentCols} items={componentSummary}/>
                                     </CCard>
                                 </CCol>
-                                <CCol xs={12}>
+                                <CCol xs={10}>
                                     <CCard className="mb-4">
                                         <CCardHeader>Freshness Summary</CCardHeader>
                                         <CTable striped columns={freshnessCols} items={freshnessSummary}/>
