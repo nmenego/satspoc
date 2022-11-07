@@ -1,6 +1,10 @@
-import React, { Component, Suspense } from 'react'
-import { HashRouter, Route, Routes } from 'react-router-dom'
+import React, {Component, Suspense} from 'react'
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import './scss/style.scss'
+import Login from "./views/pages/login/Login";
+import Register from "./views/pages/register/Register";
+import Page500 from "./views/pages/page500/Page500";
+import LocationLayout from "./layout/LocationLayout";
 
 const loading = (
     <div className="pt-3 text-center">
@@ -9,19 +13,25 @@ const loading = (
 )
 
 // Containers
-const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
+const DefaultLayout = React.lazy(() => import('./layout/LocationLayout'))
+const Page404 = React.lazy(() => import('./views/pages/page404/Page404'))
 
 
 class App extends Component {
     render() {
         return (
-            <HashRouter>
+            <BrowserRouter>
                 <Suspense fallback={loading}>
                     <Routes>
-                        <Route path="*" name="Home" element={<DefaultLayout />} />
+                        <Route exact path="login" name="Login Page" element={<Login />} />
+                        <Route exact path="register" name="Register Page" element={<Register />} />
+                        <Route exact path="404" name="Page 404" element={<Page404 />} />
+                        <Route exact path="500" name="Page 500" element={<Page500 />} />
+                        <Route exact path="location" name="Location" element={<LocationLayout />} />
+                        <Route path="*" element={<p>Path not resolved</p>} />
                     </Routes>
                 </Suspense>
-            </HashRouter>
+            </BrowserRouter>
         )
     }
 }
