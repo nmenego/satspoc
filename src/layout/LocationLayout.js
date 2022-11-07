@@ -14,14 +14,15 @@ import ReactPolling from "react-polling";
 import {useSearchParams} from "react-router-dom";
 
 const LocationLayout = () => {
-    const random = () => Math.round(Math.random() * 100)
-    const [items, setItems] = useState([]);
+    const [componentSummary, setComponentSummary] = useState([]);
+    const [freshnessSummary, setFreshnessSummary] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
     useEffect(() => {
-        console.log({items});
+        console.log({componentSummary});
+        console.log({freshnessSummary});
         console.log(searchParams.get('id'))
     });
-    const columns = [
+    const componentCols = [
         {
             key: 'locationId',
             label: 'Location ID',
@@ -43,6 +44,28 @@ const LocationLayout = () => {
             _props: {scope: 'col'},
         },
     ]
+    const freshnessCols = [
+        {
+            key: 'trayId',
+            label: 'Tray ID',
+            _props: {scope: 'col'},
+        },
+        {
+            key: 'componentName',
+            label: 'Ingredient',
+            _props: {scope: 'col'},
+        },
+        {
+            key: 'expiryDate',
+            label: 'Expiry Date',
+            _props: {scope: 'col'},
+        },
+        {
+            key: 'totalWeight',
+            label: 'Total Weight',
+            _props: {scope: 'col'},
+        },
+    ]
     return (
         <>
             <ReactPolling
@@ -51,7 +74,8 @@ const LocationLayout = () => {
                 retryCount={3} // this is optional
                 onSuccess={resp => {
                     console.log({resp});
-                    setItems(resp);
+                    setComponentSummary(resp.componentSummary);
+                    setFreshnessSummary(resp.freshnessSummary)
                     return true;
                 }}
                 onFailure={() => console.log("polling issue...")} // this is optional
@@ -62,42 +86,13 @@ const LocationLayout = () => {
                                 <CCol xs={12}>
                                     <CCard className="mb-4">
                                         <CCardHeader>Room Summary</CCardHeader>
-                                        <CTable striped columns={columns} items={items}/>
+                                        <CTable striped columns={componentCols} items={componentSummary}/>
                                     </CCard>
                                 </CCol>
-                                <CCol xs={6}>
+                                <CCol xs={12}>
                                     <CCard className="mb-4">
-                                        <CCardHeader>Nearly Expiring</CCardHeader>
-                                        <CTable striped>
-                                            <CTableHead>
-                                                <CTableRow>
-                                                    <CTableHeaderCell scope="col">Tray ID</CTableHeaderCell>
-                                                    <CTableHeaderCell scope="col">Ingredient</CTableHeaderCell>
-                                                    <CTableHeaderCell scope="col">Total Weight</CTableHeaderCell>
-                                                    <CTableHeaderCell scope="col">Expiry Date</CTableHeaderCell>
-                                                </CTableRow>
-                                            </CTableHead>
-                                            <CTableBody>
-                                                <CTableRow color="warning">
-                                                    <CTableHeaderCell scope="row">8751918</CTableHeaderCell>
-                                                    <CTableDataCell>Chicken Wings</CTableDataCell>
-                                                    <CTableDataCell>{random()} kg</CTableDataCell>
-                                                    <CTableDataCell>Today</CTableDataCell>
-                                                </CTableRow>
-                                                <CTableRow>
-                                                    <CTableHeaderCell scope="row">8237492</CTableHeaderCell>
-                                                    <CTableDataCell>Chicken Wings</CTableDataCell>
-                                                    <CTableDataCell>{random()} kg</CTableDataCell>
-                                                    <CTableDataCell>11/5</CTableDataCell>
-                                                </CTableRow>
-                                                <CTableRow>
-                                                    <CTableHeaderCell scope="row">8237492</CTableHeaderCell>
-                                                    <CTableDataCell>Beef Strips</CTableDataCell>
-                                                    <CTableDataCell>{random()} kg</CTableDataCell>
-                                                    <CTableDataCell>11/5</CTableDataCell>
-                                                </CTableRow>
-                                            </CTableBody>
-                                        </CTable>
+                                        <CCardHeader>Freshness Summary</CCardHeader>
+                                        <CTable striped columns={freshnessCols} items={freshnessSummary}/>
                                     </CCard>
                                 </CCol>
                             </>
