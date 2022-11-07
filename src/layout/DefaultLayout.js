@@ -36,7 +36,7 @@ const DefaultLayout = () => {
             _props: {scope: 'col'},
         },
     ]
-    // return <CTable columns={columns} items={items} />
+    let items = [];
     return (
         <>
             <ReactPolling
@@ -45,12 +45,57 @@ const DefaultLayout = () => {
                 retryCount={3} // this is optional
                 onSuccess={resp => {
                     console.log({resp});
+                    items = resp;
                     return true;
                 }}
-                onFailure={() => console.log("handle failure")} // this is optional
-                render={({startPolling, stopPolling, isPolling}, resp) => {
+                onFailure={() => console.log("polling issue...")} // this is optional
+                render={({startPolling, stopPolling, isPolling}) => {
                     if (isPolling) {
-                        return <CTable columns={columns} items={resp}/>
+                        return (
+                            <>
+                                <CCol xs={12}>
+                                    <CCard className="mb-4">
+                                        <CCardHeader>Room Summary</CCardHeader>
+                                        <CTable striped columns={columns} items={items}/>
+                                    </CCard>
+                                </CCol>
+                                <CCol xs={6}>
+                                    <CCard className="mb-4">
+                                        <CCardHeader>Nearly Expiring</CCardHeader>
+                                        <CTable striped>
+                                            <CTableHead>
+                                                <CTableRow>
+                                                    <CTableHeaderCell scope="col">Tray ID</CTableHeaderCell>
+                                                    <CTableHeaderCell scope="col">Ingredient</CTableHeaderCell>
+                                                    <CTableHeaderCell scope="col">Total Weight</CTableHeaderCell>
+                                                    <CTableHeaderCell scope="col">Expiry Date</CTableHeaderCell>
+                                                </CTableRow>
+                                            </CTableHead>
+                                            <CTableBody>
+                                                <CTableRow color="warning">
+                                                    <CTableHeaderCell scope="row">8751918</CTableHeaderCell>
+                                                    <CTableDataCell>Chicken Wings</CTableDataCell>
+                                                    <CTableDataCell>{random()} kg</CTableDataCell>
+                                                    <CTableDataCell>Today</CTableDataCell>
+                                                </CTableRow>
+                                                <CTableRow>
+                                                    <CTableHeaderCell scope="row">8237492</CTableHeaderCell>
+                                                    <CTableDataCell>Chicken Wings</CTableDataCell>
+                                                    <CTableDataCell>{random()} kg</CTableDataCell>
+                                                    <CTableDataCell>11/5</CTableDataCell>
+                                                </CTableRow>
+                                                <CTableRow>
+                                                    <CTableHeaderCell scope="row">8237492</CTableHeaderCell>
+                                                    <CTableDataCell>Beef Strips</CTableDataCell>
+                                                    <CTableDataCell>{random()} kg</CTableDataCell>
+                                                    <CTableDataCell>11/5</CTableDataCell>
+                                                </CTableRow>
+                                            </CTableBody>
+                                        </CTable>
+                                    </CCard>
+                                </CCol>
+                            </>
+                        );
                     } else {
                         return (
                             <>
