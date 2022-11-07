@@ -8,7 +8,6 @@ import {
     CTableDataCell, CCard, CCardHeader, CCardBody, CCol,
 } from '@coreui/react'
 import ReactPolling from "react-polling";
-import {CChartPie} from "@coreui/react-chartjs";
 
 const DefaultLayout = () => {
     const random = () => Math.round(Math.random() * 100)
@@ -25,7 +24,7 @@ const DefaultLayout = () => {
     return (
         <>
             <ReactPolling
-                url={"https://jsonplaceholder.typicode.com/posts"}
+                url={"https://sats-kitchen-poc.herokuapp.com/location/1/components"}
                 interval={3000} // in milliseconds(ms)
                 retryCount={3} // this is optional
                 onSuccess={resp => {
@@ -90,25 +89,6 @@ const DefaultLayout = () => {
                             </CTableRow>
                         </CTableBody>
                     </CTable>
-                </CCard>
-            </CCol>
-            <CCol xs={6}>
-                <CCard className="mb-4">
-                    <CCardHeader>Freshness Chart</CCardHeader>
-                    <CCardBody>
-                        {/*<CChartPie*/}
-                        {/*    data={{*/}
-                        {/*        labels: ['<1 day left', 'fresh', '<6 days left', '<3 days left'],*/}
-                        {/*        datasets: [*/}
-                        {/*            {*/}
-                        {/*                data: [random(), random(), random(), random()],*/}
-                        {/*                backgroundColor: ['#FF6384', '#008000', '#98FB98', '#FFCE56'],*/}
-                        {/*                hoverBackgroundColor: ['#FF6384', '#008000', '#98FB98', '#FFCE56'],*/}
-                        {/*            },*/}
-                        {/*        ],*/}
-                        {/*    }}*/}
-                        {/*/>*/}
-                    </CCardBody>
                 </CCard>
             </CCol>
             <CCol xs={6}>
