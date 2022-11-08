@@ -8,16 +8,13 @@ import LocationLayout from "./layout/LocationLayout";
 import HomeLayout from "./layout/HomeLayout";
 import TrayLayout from "./layout/TrayLayout";
 import TrayUpdateLayout from "./layout/TrayUpdateLayout";
+import Page404 from "./views/pages/page404/Page404";
 
 const loading = (
     <div className="pt-3 text-center">
         <div className="sk-spinner sk-spinner-pulse"></div>
     </div>
 )
-
-// Containers
-const DefaultLayout = React.lazy(() => import('./layout/LocationLayout'))
-const Page404 = React.lazy(() => import('./views/pages/page404/Page404'))
 
 
 class App extends Component {

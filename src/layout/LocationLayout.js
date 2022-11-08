@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {CCard, CCardHeader, CCol, CHeader, CTable,} from '@coreui/react'
+import {CCard, CCardHeader, CCol, CContainer, CHeader, CRow, CSpinner, CTable,} from '@coreui/react'
 import ReactPolling from "react-polling";
 import {useSearchParams} from "react-router-dom";
 
@@ -9,10 +9,8 @@ const LocationLayout = () => {
     const [freshnessSummary, setFreshnessSummary] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
     useEffect(() => {
-        console.log(locationName);
         console.log({componentSummary});
         console.log({freshnessSummary});
-        console.log(searchParams.get('id'))
     });
     const componentCols = [
         {
@@ -72,31 +70,39 @@ const LocationLayout = () => {
                 }}
                 onFailure={() => console.log("polling issue...")} // this is optional
                 render={({startPolling, stopPolling, isPolling}) => {
-                    if (isPolling) {
+                    if (isPolling && componentSummary.length !== 0) {
                         return (
-                            <>
+                            <CContainer>
                                 <CHeader>{locationName}</CHeader>
-                                <CCol xs={12}>
-                                    <CCard className="mb-4">
-                                        <CCardHeader>Room Summary</CCardHeader>
-                                        <CTable striped responsive columns={componentCols} items={componentSummary}/>
-                                    </CCard>
-                                </CCol>
-                                <CCol xs={12}>
-                                    <CCard className="mb-4">
-                                        <CCardHeader>Freshness Summary</CCardHeader>
-                                        <CTable striped responsive columns={freshnessCols} items={freshnessSummary}/>
-                                    </CCard>
-                                </CCol>
-                            </>
+                                <CRow className="justify-content-center">
+
+
+                                    <CCol xs={12}>
+                                        <CCard className="mb-4">
+                                            <CCardHeader>Room Summary</CCardHeader>
+                                            <CTable striped responsive columns={componentCols}
+                                                    items={componentSummary}/>
+                                        </CCard>
+                                    </CCol>
+                                    <CCol xs={12}>
+                                        <CCard className="mb-4">
+                                            <CCardHeader>Freshness Summary</CCardHeader>
+                                            <CTable striped responsive columns={freshnessCols}
+                                                    items={freshnessSummary}/>
+                                        </CCard>
+                                    </CCol>
+                                </CRow>
+                            </CContainer>
                         );
                     } else {
                         return (
-                            <>
-                                <div className="pt-3 text-center">
-                                    <div className="sk-spinner sk-spinner-pulse"></div>
-                                </div>
-                            </>
+                            <CContainer>
+                                <CRow className="justify-content-center">
+                                    <CCol xs={12}>
+                                        <CSpinner></CSpinner>
+                                    </CCol>
+                                </CRow>
+                            </CContainer>
                         );
                     }
                 }}

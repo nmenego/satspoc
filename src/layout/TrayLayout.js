@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from 'react'
-import {useParams, useSearchParams} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 import {
     CCard,
     CCardHeader,
     CCol,
+    CContainer,
+    CRow,
+    CSpinner,
     CTable,
     CTableBody,
     CTableDataCell,
@@ -35,53 +38,60 @@ const TrayLayout = () => {
                 }}
                 onFailure={() => console.log("polling issue...")} // this is optional
                 render={({startPolling, stopPolling, isPolling}) => {
-                    if (isPolling) {
+                    if (isPolling && trays.length !== 0) {
                         return (
                             <>
-                                <CCol xs={12}>
-                                    <CCard className="mb-4">
-                                        <CCardHeader>Trays</CCardHeader>
-                                        <CTable striped responsive>
-                                            <CTableHead>
-                                                <CTableRow>
-                                                    <CTableHeaderCell scope="col">id</CTableHeaderCell>
-                                                    <CTableHeaderCell scope="col">Tray ID</CTableHeaderCell>
-                                                    <CTableHeaderCell scope="col">Gross Weight</CTableHeaderCell>
-                                                    <CTableHeaderCell scope="col">Tray Weight</CTableHeaderCell>
-                                                    <CTableHeaderCell scope="col">Location Name</CTableHeaderCell>
-                                                    <CTableHeaderCell scope="col">Column Name</CTableHeaderCell>
-                                                    <CTableHeaderCell scope="col">Check In Date</CTableHeaderCell>
-                                                    <CTableHeaderCell scope="col">Check Out Date</CTableHeaderCell>
-                                                </CTableRow>
-                                            </CTableHead>
-                                            <CTableBody>
-                                                {
-                                                    trays.map((tray) =>
+                                <CContainer>
+                                    <CRow className="justify-content-center">
+                                        <CCol xs={12}>
+                                            <CCard className="mb-4">
+                                                <CCardHeader>Trays</CCardHeader>
+                                                <CTable striped responsive>
+                                                    <CTableHead>
                                                         <CTableRow>
-                                                            <CTableHeaderCell scope="row">{tray.id}</CTableHeaderCell>
-                                                            <CTableDataCell><a href={"/tray/" + tray.trayId}>{tray.trayShortId}</a></CTableDataCell>
-                                                            <CTableDataCell>{tray.grossWeight}</CTableDataCell>
-                                                            <CTableDataCell>{tray.tareWeight}</CTableDataCell>
-                                                            <CTableDataCell>{tray.locationName}</CTableDataCell>
-                                                            <CTableDataCell>{tray.componentName}</CTableDataCell>
-                                                            <CTableDataCell>{tray.checkInDate}</CTableDataCell>
-                                                            <CTableDataCell>{tray.checkOutDate}</CTableDataCell>
+                                                            <CTableHeaderCell scope="col">id</CTableHeaderCell>
+                                                            <CTableHeaderCell scope="col">Tray ID</CTableHeaderCell>
+                                                            <CTableHeaderCell scope="col">Gross Weight</CTableHeaderCell>
+                                                            <CTableHeaderCell scope="col">Tray Weight</CTableHeaderCell>
+                                                            <CTableHeaderCell scope="col">Location Name</CTableHeaderCell>
+                                                            <CTableHeaderCell scope="col">Column Name</CTableHeaderCell>
+                                                            <CTableHeaderCell scope="col">Check In Date</CTableHeaderCell>
+                                                            <CTableHeaderCell scope="col">Check Out Date</CTableHeaderCell>
                                                         </CTableRow>
-                                                    )
-                                                }
-                                            </CTableBody>
-                                        </CTable>
-                                    </CCard>
-                                </CCol>
+                                                    </CTableHead>
+                                                    <CTableBody>
+                                                        {
+                                                            trays.map((tray) =>
+                                                                <CTableRow>
+                                                                    <CTableHeaderCell scope="row">{tray.id}</CTableHeaderCell>
+                                                                    <CTableDataCell><a href={"/tray/" + tray.trayId}>{tray.trayShortId}</a></CTableDataCell>
+                                                                    <CTableDataCell>{tray.grossWeight}</CTableDataCell>
+                                                                    <CTableDataCell>{tray.tareWeight}</CTableDataCell>
+                                                                    <CTableDataCell>{tray.locationName}</CTableDataCell>
+                                                                    <CTableDataCell>{tray.componentName}</CTableDataCell>
+                                                                    <CTableDataCell>{tray.checkInDate}</CTableDataCell>
+                                                                    <CTableDataCell>{tray.checkOutDate}</CTableDataCell>
+                                                                </CTableRow>
+                                                            )
+                                                        }
+                                                    </CTableBody>
+                                                </CTable>
+                                            </CCard>
+                                        </CCol>
+                                    </CRow>
+                                </CContainer>
+
                             </>
                         );
                     } else {
                         return (
-                            <>
-                                <div className="pt-3 text-center">
-                                    <div className="sk-spinner sk-spinner-pulse"></div>
-                                </div>
-                            </>
+                            <CContainer>
+                                <CRow className="justify-content-center">
+                                    <CCol xs={12}>
+                                        <CSpinner></CSpinner>
+                                    </CCol>
+                                </CRow>
+                            </CContainer>
                         );
                     }
                 }}

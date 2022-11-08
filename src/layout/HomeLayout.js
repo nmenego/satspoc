@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import ReactPolling from "react-polling";
-import {CHeader} from "@coreui/react";
+import {CCol, CContainer, CHeader, CRow, CSpinner} from "@coreui/react";
 
 const LocationLayout = () => {
     const [locations, setLocations] = useState([]);
@@ -19,10 +19,10 @@ const LocationLayout = () => {
                 }}
                 onFailure={() => console.log("polling issue...")} // this is optional
                 render={({startPolling, stopPolling, isPolling}) => {
-                    if (isPolling) {
+                    if (isPolling && locations.length !== 0) {
                         return (
-                            <>
-                                <div>
+                            <CContainer>
+                                <CRow className="justify-content-center">
                                     <CHeader>Locations</CHeader>
                                     <ul>
                                         {
@@ -31,17 +31,18 @@ const LocationLayout = () => {
                                             )
                                         }
                                     </ul>
-
-                                </div>
-                            </>
+                                </CRow>
+                            </CContainer>
                         );
                     } else {
                         return (
-                            <>
-                                <div className="pt-3 text-center">
-                                    <div className="sk-spinner sk-spinner-pulse"></div>
-                                </div>
-                            </>
+                            <CContainer>
+                                <CRow className="justify-content-center">
+                                    <CCol xs={12}>
+                                        <CSpinner></CSpinner>
+                                    </CCol>
+                                </CRow>
+                            </CContainer>
                         );
                     }
                 }}
