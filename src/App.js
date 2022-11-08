@@ -5,6 +5,8 @@ import Login from "./views/pages/login/Login";
 import Register from "./views/pages/register/Register";
 import Page500 from "./views/pages/page500/Page500";
 import LocationLayout from "./layout/LocationLayout";
+import HomeLayout from "./layout/HomeLayout";
+import TrayLayout from "./layout/TrayLayout";
 
 const loading = (
     <div className="pt-3 text-center">
@@ -28,7 +30,8 @@ class App extends Component {
                         <Route exact path="404" name="Page 404" element={<Page404 />} />
                         <Route exact path="500" name="Page 500" element={<Page500 />} />
                         <Route exact path="location" name="Location" element={<LocationLayout />} />
-                        <Route path="*" element={<p>Path not resolved</p>} />
+                        <Route exact path="tray" name="Tray" element={<TrayLayout />} />
+                        <Route path="*" name="Home" element={<HomeLayout />} />
                     </Routes>
                 </Suspense>
             </BrowserRouter>
