@@ -7,6 +7,7 @@ import Page500 from "./views/pages/page500/Page500";
 import LocationLayout from "./layout/LocationLayout";
 import HomeLayout from "./layout/HomeLayout";
 import TrayLayout from "./layout/TrayLayout";
+import TrayUpdateLayout from "./layout/TrayUpdateLayout";
 
 const loading = (
     <div className="pt-3 text-center">
@@ -31,6 +32,7 @@ class App extends Component {
                         <Route exact path="500" name="Page 500" element={<Page500 />} />
                         <Route exact path="location" name="Location" element={<LocationLayout />} />
                         <Route exact path="tray" name="Tray" element={<TrayLayout />} />
+                        <Route exact path="tray/:trayId" name="Tray" element={<TrayUpdateLayout />} />
                         <Route path="*" name="Home" element={<HomeLayout />} />
                     </Routes>
                 </Suspense>

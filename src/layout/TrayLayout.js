@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react'
-import {useSearchParams} from "react-router-dom";
+import {useParams, useSearchParams} from "react-router-dom";
 import {
     CCard,
     CCardHeader,
     CCol,
-    CHeader,
     CTable,
     CTableBody,
-    CTableDataCell, CTableHead,
+    CTableDataCell,
+    CTableHead,
     CTableHeaderCell,
     CTableRow
 } from "@coreui/react";
@@ -38,7 +38,6 @@ const TrayLayout = () => {
                     if (isPolling) {
                         return (
                             <>
-                                <CHeader>Trays</CHeader>
                                 <CCol xs={12}>
                                     <CCard className="mb-4">
                                         <CCardHeader>Trays</CCardHeader>
@@ -60,7 +59,7 @@ const TrayLayout = () => {
                                                     trays.map((tray) =>
                                                         <CTableRow>
                                                             <CTableHeaderCell scope="row">{tray.id}</CTableHeaderCell>
-                                                            <CTableDataCell>{tray.trayShortId}</CTableDataCell>
+                                                            <CTableDataCell><a href={"/tray/" + tray.trayId}>{tray.trayShortId}</a></CTableDataCell>
                                                             <CTableDataCell>{tray.grossWeight}</CTableDataCell>
                                                             <CTableDataCell>{tray.tareWeight}</CTableDataCell>
                                                             <CTableDataCell>{tray.locationName}</CTableDataCell>
