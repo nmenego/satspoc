@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react'
-import {CCard, CCardHeader, CCol, CContainer, CHeader, CRow, CSpinner, CTable,} from '@coreui/react'
+import {CCard, CCardHeader, CCol, CContainer, CRow, CTable,} from '@coreui/react'
 import ReactPolling from "react-polling";
 import {useSearchParams} from "react-router-dom";
+import LoadingScreen from "./LoadingScreen";
 
 const LocationLayout = () => {
     const [locationName, setLocationName] = useState("");
@@ -21,6 +22,11 @@ const LocationLayout = () => {
         {
             key: 'componentName',
             label: 'Content',
+            _props: {scope: 'col'},
+        },
+        {
+            key: 'sku',
+            label: 'SKU',
             _props: {scope: 'col'},
         },
         {
@@ -46,6 +52,11 @@ const LocationLayout = () => {
             _props: {scope: 'col'},
         },
         {
+            key: 'sku',
+            label: 'SKU',
+            _props: {scope: 'col'},
+        },
+        {
             key: 'totalWeight',
             label: 'Total Weight',
             _props: {scope: 'col'},
@@ -60,7 +71,7 @@ const LocationLayout = () => {
         <>
             <ReactPolling
                 url={"https://sats-kitchen-poc.herokuapp.com/location/" + searchParams.get('id') + "/components"}
-                interval={3000} // in milliseconds(ms)
+                interval={1000} // in milliseconds(ms)
                 retryCount={3} // this is optional
                 onSuccess={resp => {
                     setLocationName(resp.locationName);
@@ -72,37 +83,33 @@ const LocationLayout = () => {
                 render={({startPolling, stopPolling, isPolling}) => {
                     if (isPolling && componentSummary.length !== 0) {
                         return (
-                            <CContainer>
-                                <CHeader>{locationName}</CHeader>
-                                <CRow className="justify-content-center">
+                            <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
+                                <CContainer>
+                                    <h1>{locationName}</h1>
+                                    <CRow className="justify-content-center">
 
+                                        <CCol xs={12}>
+                                            <CCard className="mb-4">
+                                                <CCardHeader>Room Summary</CCardHeader>
+                                                <CTable striped responsive columns={componentCols}
+                                                        items={componentSummary}/>
+                                            </CCard>
+                                        </CCol>
 
-                                    <CCol xs={12}>
-                                        <CCard className="mb-4">
-                                            <CCardHeader>Room Summary</CCardHeader>
-                                            <CTable striped responsive columns={componentCols}
-                                                    items={componentSummary}/>
-                                        </CCard>
-                                    </CCol>
-                                    <CCol xs={12}>
-                                        <CCard className="mb-4">
-                                            <CCardHeader>Freshness Summary</CCardHeader>
-                                            <CTable striped responsive columns={freshnessCols}
-                                                    items={freshnessSummary}/>
-                                        </CCard>
-                                    </CCol>
-                                </CRow>
-                            </CContainer>
+                                        <CCol xs={12}>
+                                            <CCard className="mb-4">
+                                                <CCardHeader>Freshness Summary</CCardHeader>
+                                                <CTable striped responsive columns={freshnessCols}
+                                                        items={freshnessSummary}/>
+                                            </CCard>
+                                        </CCol>
+                                    </CRow>
+                                </CContainer>
+                            </div>
                         );
                     } else {
                         return (
-                            <CContainer>
-                                <CRow className="justify-content-center">
-                                    <CCol xs={12}>
-                                        <CSpinner></CSpinner>
-                                    </CCol>
-                                </CRow>
-                            </CContainer>
+                            <LoadingScreen/>
                         );
                     }
                 }}
