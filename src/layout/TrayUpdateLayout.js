@@ -39,7 +39,6 @@ const TrayUpdateLayout = () => {
     const getTray = () => {
         axios.get(`https://sats-kitchen-poc.herokuapp.com/tray/${trayId}`).then(resp => {
                 setTray(resp.data[0]);
-                console.log({tray})
             }
         );
     }
@@ -79,6 +78,18 @@ const TrayUpdateLayout = () => {
                                                 <CTableRow>
                                                     <CTableHeaderCell scope="row">Tare Weight</CTableHeaderCell>
                                                     <CTableDataCell>{tray.tareWeight}</CTableDataCell>
+                                                </CTableRow>
+                                                <CTableRow>
+                                                    <CTableHeaderCell scope="row">unit</CTableHeaderCell>
+                                                    <CTableDataCell>{tray.unit}</CTableDataCell>
+                                                </CTableRow>
+                                                <CTableRow>
+                                                    <CTableHeaderCell scope="row">SKU</CTableHeaderCell>
+                                                    <CTableDataCell>{tray.sku}</CTableDataCell>
+                                                </CTableRow>
+                                                <CTableRow>
+                                                    <CTableHeaderCell scope="row">Content</CTableHeaderCell>
+                                                    <CTableDataCell>{tray.componentName}</CTableDataCell>
                                                 </CTableRow>
                                             </CTableBody>
                                         </CTable>

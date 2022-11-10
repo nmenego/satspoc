@@ -56,8 +56,8 @@ const TrayLayout = () => {
                                                             <CTableHeaderCell scope="col">Tray Weight</CTableHeaderCell>
                                                             <CTableHeaderCell scope="col">Location
                                                                 Name</CTableHeaderCell>
-                                                            <CTableHeaderCell scope="col">Column Name</CTableHeaderCell>
                                                             <CTableHeaderCell scope="col">SKU</CTableHeaderCell>
+                                                            <CTableHeaderCell scope="col">Units</CTableHeaderCell>
                                                             <CTableHeaderCell scope="col">Check In
                                                                 Date</CTableHeaderCell>
                                                             <CTableHeaderCell scope="col">Check Out
@@ -76,6 +76,7 @@ const TrayLayout = () => {
                                                                     <CTableDataCell>{tray.tareWeight}</CTableDataCell>
                                                                     <CTableDataCell>{tray.locationName}</CTableDataCell>
                                                                     <CTableDataCell>{tray.sku}</CTableDataCell>
+                                                                    <CTableDataCell>{tray.unit}</CTableDataCell>
                                                                     <CTableDataCell>{tray.componentName}</CTableDataCell>
                                                                     <CTableDataCell>{tray.checkInDate}</CTableDataCell>
                                                                     <CTableDataCell>{tray.checkOutDate}</CTableDataCell>

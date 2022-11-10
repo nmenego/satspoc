@@ -15,11 +15,6 @@ const LocationLayout = () => {
     });
     const componentCols = [
         {
-            key: 'locationId',
-            label: 'Location ID',
-            _props: {scope: 'col'},
-        },
-        {
             key: 'componentName',
             label: 'Content',
             _props: {scope: 'col'},
@@ -30,13 +25,18 @@ const LocationLayout = () => {
             _props: {scope: 'col'},
         },
         {
-            key: 'trayCount',
-            label: 'Tray Count',
+            key: 'totalWeight',
+            label: 'Total Weight',
             _props: {scope: 'col'},
         },
         {
-            key: 'totalWeight',
-            label: 'Total Weight',
+            key: 'unit',
+            label: 'Units',
+            _props: {scope: 'col'},
+        },
+        {
+            key: 'trayCount',
+            label: 'Tray Count',
             _props: {scope: 'col'},
         },
     ]
@@ -59,6 +59,11 @@ const LocationLayout = () => {
         {
             key: 'totalWeight',
             label: 'Total Weight',
+            _props: {scope: 'col'},
+        },
+        {
+            key: 'unit',
+            label: 'Units',
             _props: {scope: 'col'},
         },
         {
