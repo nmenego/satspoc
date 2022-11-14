@@ -31,7 +31,7 @@ class App extends Component {
                         <Route exact path="location" name="Location" element={<LocationLayout />} />
                         <Route exact path="tray" name="Tray" element={<TrayLayout />} />
                         <Route exact path="tray/:trayId" name="Tray" element={<TrayUpdateLayout />} />
-                        <Route exact path="amount" name="Oven" element={<OvenLayout />} />
+                        <Route exact path="oven/amount" name="Oven" element={<OvenLayout />} />
                         <Route path="*" name="Home" element={<HomeLayout />} />
                     </Routes>
                 </Suspense>
