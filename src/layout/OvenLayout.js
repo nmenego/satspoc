@@ -37,7 +37,7 @@ const OvenLayout = () => {
     return (
         <>
             <ReactPolling
-                url={"https://sats-kitchen-poc.herokuapp.com/oven?oven_code=" + searchParams.get("oven_code")}
+                url={"https://sats-kitchen-poc.herokuapp.com/oven" + (searchParams.get("oven_code") === null ? "" : "?oven_code=" + searchParams.get("oven_code"))}
                 interval={3000} // in milliseconds(ms)
                 retryCount={3} // this is optional
                 onSuccess={resp => {
