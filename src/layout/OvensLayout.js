@@ -1,18 +1,11 @@
 import React, {useState} from 'react'
 import {CCard, CCardHeader, CCol, CContainer, CRow, CTable,} from '@coreui/react'
 import ReactPolling from "react-polling";
-import {useSearchParams} from "react-router-dom";
 import LoadingScreen from "./LoadingScreen";
 
-const OvenLayout = () => {
-    const [oven, setOven] = useState([]);
-    const [searchParams, setSearchParams] = useSearchParams();
-    const ovenCols = [
-        {
-            key: 'ovenCode',
-            label: 'Oven Code',
-            _props: {scope: 'col'},
-        },
+const OvensSummaryLayout = () => {
+    const [ovens, setOvens] = useState([]);
+    const ovensCols = [
         {
             key: 'dishName',
             label: 'Name',
@@ -28,25 +21,20 @@ const OvenLayout = () => {
             label: 'Count',
             _props: {scope: 'col'},
         },
-        {
-            key: 'insertedAt',
-            label: 'Scan Time',
-            _props: {scope: 'col'},
-        },
     ];
     return (
         <>
             <ReactPolling
-                url={"https://sats-kitchen-poc.herokuapp.com/oven?oven_code=" + searchParams.get("oven_code")}
+                url={"https://sats-kitchen-poc.herokuapp.com/oven/aggregate"}
                 interval={3000} // in milliseconds(ms)
                 retryCount={3} // this is optional
                 onSuccess={resp => {
-                    setOven(resp);
+                    setOvens(resp);
                     return true;
                 }}
                 onFailure={() => console.log("polling issue...")} // this is optional
                 render={({startPolling, stopPolling, isPolling}) => {
-                    if (isPolling && oven !== null && oven.length !== 0) {
+                    if (isPolling && ovens !== null && ovens.length !== 0) {
                         return (
                             <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
                                 <CContainer>
@@ -54,9 +42,9 @@ const OvenLayout = () => {
 
                                         <CCol xs={12}>
                                             <CCard className="mb-4">
-                                                <CCardHeader>Oven Details {searchParams.get("oven_code")}</CCardHeader>
-                                                <CTable striped responsive columns={ovenCols}
-                                                        items={oven}/>
+                                                <CCardHeader>Oven Summary</CCardHeader>
+                                                <CTable striped responsive columns={ovensCols}
+                                                        items={ovens}/>
                                             </CCard>
                                         </CCol>
                                     </CRow>
@@ -74,4 +62,4 @@ const OvenLayout = () => {
     )
 }
 
-export default OvenLayout
+export default OvensSummaryLayout

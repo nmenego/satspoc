@@ -10,6 +10,7 @@ import TrayLayout from "./layout/TrayLayout";
 import TrayUpdateLayout from "./layout/TrayUpdateLayout";
 import Page404 from "./views/pages/page404/Page404";
 import OvenLayout from "./layout/OvenLayout";
+import OvensLayout from "./layout/OvensLayout";
 
 const loading = (
     <div className="pt-3 text-center">
@@ -31,7 +32,8 @@ class App extends Component {
                         <Route exact path="location" name="Location" element={<LocationLayout />} />
                         <Route exact path="tray" name="Tray" element={<TrayLayout />} />
                         <Route exact path="tray/:trayId" name="Tray" element={<TrayUpdateLayout />} />
-                        <Route exact path="oven/amount" name="Oven" element={<OvenLayout />} />
+                        <Route exact path="oven" name="Oven" element={<OvenLayout />} />
+                        <Route exact path="ovens" name="Ovens" element={<OvensLayout />} />
                         <Route path="*" name="Home" element={<HomeLayout />} />
                     </Routes>
                 </Suspense>

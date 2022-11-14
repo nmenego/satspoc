@@ -45,6 +45,16 @@ const LocationLayout = () => {
                                             </CCard>
                                         </CCol>
                                     </CRow>
+                                    <CRow className="justify-content-center">
+                                        <CCol xs={12}>
+                                            <CCard className="mb-4">
+                                                <CHeader><a href={"/oven?oven_code=OV-1100034"}>Oven 1</a></CHeader>
+                                                <CHeader><a href={"/oven?oven_code=OV-1203256"}>Oven 2</a></CHeader>
+                                                <CHeader><a href={"/oven"}>All ovens</a></CHeader>
+                                                <CHeader><a href={"/ovens"}>Oven Aggregate</a></CHeader>
+                                            </CCard>
+                                        </CCol>
+                                    </CRow>
                                 </CContainer>
                             </div>
                         );
