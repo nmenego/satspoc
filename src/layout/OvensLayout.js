@@ -42,7 +42,7 @@ const OvensSummaryLayout = () => {
 
                                         <CCol xs={12}>
                                             <CCard className="mb-4">
-                                                <CCardHeader>Oven Summary</CCardHeader>
+                                                <CCardHeader>Foodbank Summary</CCardHeader>
                                                 <CTable striped responsive columns={ovensCols}
                                                         items={ovens}/>
                                             </CCard>
