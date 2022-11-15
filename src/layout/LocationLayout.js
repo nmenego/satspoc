@@ -86,7 +86,7 @@ const LocationLayout = () => {
                 }}
                 onFailure={() => console.log("polling issue...")} // this is optional
                 render={({startPolling, stopPolling, isPolling}) => {
-                    if (isPolling && componentSummary.length !== 0) {
+                    if (isPolling) {
                         return (
                             <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
                                 <CContainer>
