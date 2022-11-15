@@ -16,12 +16,12 @@ const LocationLayout = () => {
     const componentCols = [
         {
             key: 'componentName',
-            label: 'Content',
+            label: 'Material',
             _props: {scope: 'col'},
         },
         {
             key: 'sku',
-            label: 'SKU',
+            label: 'Material Description',
             _props: {scope: 'col'},
         },
         {
@@ -48,12 +48,12 @@ const LocationLayout = () => {
         },
         {
             key: 'componentName',
-            label: 'Content',
+            label: 'Material',
             _props: {scope: 'col'},
         },
         {
             key: 'sku',
-            label: 'SKU',
+            label: 'Material Description',
             _props: {scope: 'col'},
         },
         {
