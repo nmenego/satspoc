@@ -46,7 +46,7 @@ const OvenLayout = () => {
                 }}
                 onFailure={() => console.log("polling issue...")} // this is optional
                 render={({startPolling, stopPolling, isPolling}) => {
-                    if (isPolling && oven !== null && oven.length !== 0) {
+                    if (isPolling && oven !== null) {
                         return (
                             <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
                                 <CContainer>

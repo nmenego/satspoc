@@ -34,7 +34,7 @@ const OvensSummaryLayout = () => {
                 }}
                 onFailure={() => console.log("polling issue...")} // this is optional
                 render={({startPolling, stopPolling, isPolling}) => {
-                    if (isPolling && ovens !== null && ovens.length !== 0) {
+                    if (isPolling && ovens !== null) {
                         return (
                             <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
                                 <CContainer>
