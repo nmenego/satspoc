@@ -38,11 +38,11 @@ const OvensSummaryLayout = () => {
                         return (
                             <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
                                 <CContainer>
+                                    <h1>Foodbank Summary</h1>
                                     <CRow className="justify-content-center">
 
                                         <CCol xs={12}>
                                             <CCard className="mb-4">
-                                                <CCardHeader>Foodbank Summary</CCardHeader>
                                                 <CTable striped responsive columns={ovensCols}
                                                         items={ovens}/>
                                             </CCard>
